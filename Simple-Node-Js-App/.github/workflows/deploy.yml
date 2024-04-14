@@ -1,0 +1,48 @@
+
+name: Node.js Application CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master  # Triggers the workflow on pushes to the master
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest  # Runner environment
+
+    steps:
+    - name: Check Out Repo
+      uses: actions/checkout@v2  # Checks out repository under $GITHUB_WORKSPACE, so workflow can do his thing
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: victorebm
+        password: ${{ secrets.DOCKER_ACCESS_TOKEN }}  # access token stored in GitHub Secrets and generated from docker when you go on your docker security page
+
+    - name: Build and Push Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: Dockerfile
+        tags: victorebm/web-app:latest  
+        push: true
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Update EC2 instance using AWS SSM  # Security best practices – using ssm instead of ssh and the ec2 has ssm access
+      run: |
+        aws ssm send-command \
+          --document-name "AWS-RunShellScript" \
+          --targets '[{"Key":"InstanceIds","Values":["i-05ee5f09b111ce036"]}]"' \
+          --parameters '{"commands":["docker pull victorebm/web-app:latest", "docker stop web-app || true", "docker rm web-app || true", "docker run -d --name web-app -p 80:3000 victorebm/web-app:latest"]}' \
+          --timeout-seconds 600 \
+          --max-concurrency "50" \
+          --max-errors "0" \
+          --output text
+
