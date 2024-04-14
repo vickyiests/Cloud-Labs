@@ -45,4 +45,4 @@ This will run the application on 'http://localhost:8080'
 # Docker Build
 
 ``` docker build -t web-app . ```
-``` docker run -p 8080:8080 web-app ```
+``` docker run -p 3000:3000 web-app ```
