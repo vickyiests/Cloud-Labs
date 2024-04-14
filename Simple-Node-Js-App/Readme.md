@@ -46,3 +46,13 @@ This will run the application on 'http://localhost:8080'
 
 ``` docker build -t web-app . ```
 ``` docker run -p 3000:3000 web-app ```
+
+# installing Docker on EC2 
+
+```sudo yum update -y
+sudo yum install docker -y
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo usermod -a -G docker ec2-user (gives ec2 user permission to execute docker commands without using sudo after)
+
+ ```
