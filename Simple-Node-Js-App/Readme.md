@@ -53,6 +53,6 @@ This will run the application on 'http://localhost:8080'
 sudo yum install docker -y
 sudo systemctl start docker
 sudo systemctl enable docker
-sudo usermod -a -G docker ec2-user (gives ec2 user permission to execute docker commands without using sudo after)
+sudo usermod -a -G docker ec2-user #gives ec2 user permission to execute docker commands without using sudo after#
 
  ```
