@@ -5,7 +5,7 @@ A simple "Hello World" node. js app and containarized with Docker, leveraging Gi
 
 ## Features
 
-- **Node.js**: Simple server that responds with "Hello World".
+- **Node.js**: Simple server that responds with "Hello World" and you can tweak it to your taste.
 - **Docker**: Application containerization for consistent deployment.
 - **GitHub Actions**: Automated workflows for CI/CD.
 - **Terraform**: Infrastructure as Code to provision AWS EC2 instances.
