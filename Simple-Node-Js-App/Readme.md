@@ -39,7 +39,7 @@ cd web-app
 
 ``` npm start ```
 
-This will run the application on 'http://localhost:8080'
+This will run the application on 'http://localhost:3000'
 
 
 # Docker Build
