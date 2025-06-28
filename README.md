@@ -1,6 +1,6 @@
 # Cloud Lab Practices
 
-Welcome to my Cloud Lab Practices repo – This is a work in progress as I explore various cloud technologies and implement different lab scenarios for learning. Topics covers basic, intermediate to advanced.
+Welcome to my Cloud Lab Practices repo. This is a work in progress as I explore various cloud technologies and implement different lab scenarios for learning. Topics covers basic, intermediate to advanced.
 
 
 ## Overview
